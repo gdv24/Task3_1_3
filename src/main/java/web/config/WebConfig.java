@@ -105,6 +105,7 @@ public class WebConfig implements WebMvcConfigurer {
         vendorAdapter.setShowSql(true);
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.connection.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.connection.CharSet", "utf-8");
         properties.setProperty("hibernate.connection.useUnicode", "true");
         properties.setProperty("hibernate.connection.characterEncoding", "utf-8");

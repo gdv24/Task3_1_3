@@ -35,6 +35,7 @@ public class UsersController {
     public String newUser(@ModelAttribute("user") User user){
         return "users/new";
     }
+
     @PostMapping()
     public String create(@ModelAttribute("user") User user){
         userDaoImpl.save(user);
