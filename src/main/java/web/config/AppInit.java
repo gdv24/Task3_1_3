@@ -13,13 +13,18 @@ import javax.sql.rowset.serial.SerialException;
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[0];
+          return new Class<?>[] {SecurityConfig.class, WebEmConfig.class};
+//        return new Class[0];
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[] {WebConfig.class};
     }
+//    protected  Class<?>[] getServletConfigClasses(){
+//        return null;
+//    }
+
 
     @Override
     protected String[] getServletMappings() {

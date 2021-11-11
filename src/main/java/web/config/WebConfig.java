@@ -44,6 +44,7 @@ public class WebConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
@@ -66,16 +67,16 @@ public class WebConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
     }
 
-    @Bean
-    public DataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("db.driver"));
-        dataSource.setUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.username"));
-        dataSource.setPassword(env.getProperty("db.password"));
-        return dataSource;
-    }
-
+//    @Bean
+//    public DataSource getDataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(env.getProperty("db.driver"));
+//        dataSource.setUrl(env.getProperty("db.url"));
+//        dataSource.setUsername(env.getProperty("db.username"));
+//        dataSource.setPassword(env.getProperty("db.password"));
+//        return dataSource;
+//    }
+//-----------------------------------------
 //    @Bean
 //    public LocalSessionFactoryBean getSessionFactory() {
 //        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -96,35 +97,35 @@ public class WebConfig implements WebMvcConfigurer {
 //        transactionManager.setSessionFactory(getSessionFactory().getObject());
 //        return transactionManager;
 //    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(true);
-        vendorAdapter.setShowSql(true);
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.connection.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        properties.setProperty("hibernate.connection.CharSet", "utf-8");
-        properties.setProperty("hibernate.connection.useUnicode", "true");
-        properties.setProperty("hibernate.connection.characterEncoding", "utf-8");
-
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("web.model");
-        factory.setDataSource(getDataSource());
-        factory.setJpaProperties(properties);
-
-        return factory;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-
-        JpaTransactionManager txManager = new JpaTransactionManager();
-        txManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        return txManager;
-    }
+//--------------------------------------------------
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//
+//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        vendorAdapter.setGenerateDdl(true);
+//        vendorAdapter.setShowSql(true);
+//        Properties properties = new Properties();
+//        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+//        properties.setProperty("hibernate.connection.dialect", "org.hibernate.dialect.MySQL5Dialect");
+//        properties.setProperty("hibernate.connection.CharSet", "utf-8");
+//        properties.setProperty("hibernate.connection.useUnicode", "true");
+//        properties.setProperty("hibernate.connection.characterEncoding", "utf-8");
+//
+//        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+//        factory.setJpaVendorAdapter(vendorAdapter);
+//        factory.setPackagesToScan("web.model");
+//        factory.setDataSource(getDataSource());
+//        factory.setJpaProperties(properties);
+//
+//        return factory;
+//    }
+//
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//
+//        JpaTransactionManager txManager = new JpaTransactionManager();
+//        txManager.setEntityManagerFactory(entityManagerFactory().getObject());
+//        return txManager;
+//    }
 
 }
