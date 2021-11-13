@@ -47,19 +47,6 @@ public class UserDaoImpl implements UserDao {
         entityManager.persist(user);
     }
 
-//    @Transactional
-//    public void update(Long id, User updateUser){
-//        Query query = entityManager.createQuery("select u from User u WHERE u.id=:id");
-//        query.setParameter("id",id);
-//        User userToUpdate = (User) query.getSingleResult();
-//        userToUpdate.setName(updateUser.getName());
-//        userToUpdate.setAge(updateUser.getAge());
-//        userToUpdate.setEmail(updateUser.getEmail());
-//        userToUpdate.setUsername(updateUser.getUsername());
-//        userToUpdate.setPassword(updateUser.getPassword());
-//        userToUpdate.setRoles(updateUser.getRoles());
-//    }
-
     @Transactional
     public void update(User user) {
         entityManager.merge(user);

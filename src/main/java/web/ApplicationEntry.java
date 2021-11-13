@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-//import web.config.WebConfig;
-//import web.config.WebEmConfig;
 
 @SpringBootApplication
 @EnableTransactionManagement(proxyTargetClass = true)
