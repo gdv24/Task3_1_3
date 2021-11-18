@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import web.dao.RoleDaoImpl;
 import web.dao.UserDaoImpl;
 import web.model.User;
+import web.model.Role;
+
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -26,8 +29,11 @@ public class UsersController {
     }
 
     @GetMapping("/admin")
-    public String index(Model model){
+    public String index(@ModelAttribute("newUser") User user,Model model,Principal principal){
+        String principalName = principal.getName();
+        model.addAttribute("userCurrent",userDaoImpl.getUserByName(principalName));
         model.addAttribute("users",userDaoImpl.index());
+        model.addAttribute("role",roleDaoImpl.getAllRoles());
         return "index";
     }
 
@@ -56,10 +62,20 @@ public class UsersController {
         model.addAttribute("users",userDaoImpl.show(id));
         return "edit";
     }
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @RequestParam("role") ArrayList<Long> role,
-                         @PathVariable("id") Long id){
+
+    @PostMapping("/{id}")
+    public String updateUser(@ModelAttribute("user") User user, @RequestParam(name = "role") ArrayList<Long> role) {
+//        user.setRoles(role.stream().map((r2) -> roleDaoImpl.getByIdRoles(r2)).collect(Collectors.toSet()));
         user.setRoles(roleDaoImpl.getByIdRoles(role));
+        userDaoImpl.update(user);
+        return "redirect:/admin";
+    }
+
+
+    @PatchMapping("/update/{id}")
+    public String update(@ModelAttribute("user") User user, @RequestParam(required=false, name = "role") ArrayList<Long> role){
+//                         @PathVariable("id") Long id){
+//        user.setRoles(roleDaoImpl.getByIdRoles(role));
         userDaoImpl.update(user);
         return "redirect:/admin";
     }
@@ -71,7 +87,9 @@ public class UsersController {
     @GetMapping("/user")
     public String showUser(Principal principal, Model model){
         String principalName = principal.getName();
-        model.addAttribute("users", userDaoImpl.getUserByName(principalName));
+        model.addAttribute("userCurrent",userDaoImpl.getUserByName(principalName));
+        model.addAttribute("users",userDaoImpl.index());
+        model.addAttribute("role",roleDaoImpl.getAllRoles());
         return "show_user";
     }
 }

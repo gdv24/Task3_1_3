@@ -1,24 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-  <title>User</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" rel="stylesheet">
+
+    <title>Users</title>
 </head>
 <body>
-<p><b>Имя :</b></p>
-<p th:text="${users.getName()}">VALUE</p>
-<p><b>Пароль :</b></p>
-<p th:text="${users.getPassword()}">VALUE</p>
-<p><b>Возраст :</b></p>
-<p th:text="${users.getAge()}">VALUE</p>
-<p><b>Почтовый адрес:</b></p>
-<p th:text="${users.getEmail()}">VALUE</p>
-<p><b>Логин:</b></p>
-<p th:text="${users.getUsername()}">VALUE</p>
-<p><b>Уровень доступа:</b></p>
-<p th:text="${users.getRoles()}">VALUE</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
 
-<p></p>
-<a th:href="@{/logout}">Выход</a>
+    <span class="navbar-text">
+    <b style="color: aliceblue" th:text="${userCurrent.getUsername()}">VALUE</b> with roles: <a
+            th:text="${userCurrent.getRoles()}">VALUE</a>
+    </span>
+    <a style="color: darkgray" th:href="@{/logout}">Logout</a>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <p></p>
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab"
+                   aria-controls="v-pills-user" aria-selected="true">User</a>
+            </div>
+        </div>
+        <div class="col-9 bg-light vh-300">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                    <p></p>
+                    <p style="font-size: 200%"> User information page</p>
+                    <p></p>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <b>About user</b>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover bg-white">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${userCurrent.getId()}"></td>
+                                    <td th:text="${userCurrent.getName()}"></td>
+                                    <td th:text="${userCurrent.getUsername()}"></td>
+                                    <td th:text="${userCurrent.getAge()}"></td>
+                                    <td th:text="${userCurrent.getEmail()}"></td>
+                                    <td th:text="${userCurrent.getRoles()}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <h1>&nbsp;</h1>
+                    <h1>&nbsp;</h1>
+                    <h1>&nbsp;</h1>
+                    <h1>&nbsp;</h1>
+                    <h1>&nbsp;</h1>
+                    <h1>&nbsp;</h1>
+                    <h1>&nbsp;</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>
