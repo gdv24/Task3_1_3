@@ -35,10 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         http.addFilterBefore(filter, CsrfFilter.class);
+        http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .antMatchers("/users/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers("/api/**").permitAll()
                 .and().formLogin()
                 .successHandler(successUserHandler);
     }
