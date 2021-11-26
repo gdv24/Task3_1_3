@@ -3,17 +3,13 @@ package web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.dao.RoleDaoImpl;
 import web.dao.UserDaoImpl;
-import web.model.Role;
 import web.model.User;
 
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("*")

@@ -6,11 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.dao.RoleDaoImpl;
 import web.dao.UserDaoImpl;
+import web.model.Role;
 import web.model.User;
 
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -26,9 +30,14 @@ public class UsersController {
         this.roleDaoImpl = roleDaoImpl;
     }
 
+
     @GetMapping("/admin")
     public String index(@ModelAttribute("newUser") User user,Model model,Principal principal){
         String principalName = principal.getName();
+//        User adminUser = new User("admin2",34,"admin2","admin","admin",roleDaoImpl.getByNameRoles("ROLE_ADMIN"));
+//        User userUser = new User("admin2",34,"admin2","admin","admin",roleDaoImpl.getByNameRoles("ROLE_USER"));
+//        userDaoImpl.save(adminUser);
+//        userDaoImpl.save(userUser);
         model.addAttribute("userCurrent",userDaoImpl.getUserByName(principalName));
         model.addAttribute("users",userDaoImpl.index());
         model.addAttribute("role",roleDaoImpl.getAllRoles());

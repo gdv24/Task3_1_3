@@ -42,6 +42,7 @@ public class UserDaoImpl implements UserDao {
         return query.getSingleResult();
     }
 
+
     @Transactional
     public void save(User user) {
         entityManager.persist(user);

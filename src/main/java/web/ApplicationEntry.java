@@ -9,12 +9,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement(proxyTargetClass = true)
 public class ApplicationEntry extends SpringBootServletInitializer {
+
+
+
     public static void main(String[] args) {
 
+
         SpringApplication.run(ApplicationEntry.class, args);
-    }
+
+
+        }
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ApplicationEntry.class);
     }
+
 }

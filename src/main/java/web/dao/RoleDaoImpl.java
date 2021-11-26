@@ -18,6 +18,7 @@ public class RoleDaoImpl implements RoleDao{
 
     @PersistenceContext
     private EntityManager entityManager;
+    private String nameRoles;
 
 
     @Override
@@ -30,5 +31,11 @@ public class RoleDaoImpl implements RoleDao{
     public Set<Role> getByIdRoles(List<Long> idR) {
         TypedQuery<Role> query = entityManager.createQuery("select r FROM Role r WHERE r.id in :idR", Role.class);
         return new HashSet<>(query.setParameter("idR", idR).getResultList());
+    }
+    @Override
+    public Set<Role> getByNameRoles(String nameRoles){
+        this.nameRoles = nameRoles;
+        TypedQuery<Role> query = entityManager.createQuery("select r FROM Role r WHERE r.name in :nameRoles",Role.class);
+    return new HashSet<>(query.setParameter("nameRoles", nameRoles).getResultList());
     }
 }
